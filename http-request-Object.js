@@ -1,4 +1,8 @@
 const http = require('http');
+const {readFileSync} = require('fs');
+
+//get all files
+const homepage = require('./index.html')
 
  const server = http.createServer(function(req, res){
     // console.log(req.method)
