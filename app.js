@@ -1,29 +1,19 @@
 const express = require('express');
+const path = require('path');
+
 const app = express();
 
-app.get('/', function(req,res){
- console.log('user hit the resorce')
- res.status(200).send('Home Page')
-})
+// setup static and middleware
+app.use(express.static('./public'))
 
-app.get('/about', function(req,res){
-    res.status(200).send('About Page')
+app.get('/', function(req,res){
+    res.sendFile(path.resolve(__dirname, './navbar-app/index.html'))
 })
 
 app.all('*', function(req,res){
-    res.status(404).send('<h1>resource not found</h1>')
+    res.status(404).send('resource not found')
 })
 
 app.listen(5000, function(){
-    console.log('server is listenig on port 5000')
+    console.log('server is listening on port 5000...')
 })
-
-
-
-//app.get
-//app.post
-//app.put
-//app.delete
-//app.all
-//app.use
-//app.listen
