@@ -1,24 +1,23 @@
 const express = require('express'); 
 const app = express(); 
-
+const logger = require('./logger')
 //req => middleware => res
 
-const logger = (req, res, next) =>{
-    const method = req.method;
-    const url = req.url
-    const time = new Date();
-    console.log(method, url, time)
-    //res.send('Testing')
-    next();
-}
+app.use(logger)
+// api/home/about/products
 
-app.get('/', logger, function(req,res){
-   
+app.get('/', function(req,res){
     res.send('Home')
 })
-
-app.get('/about', function(req, res){
+app.get('/about', function(req,res){
     res.send('About')
+})
+app.get('/api/products', function(req,res){
+    res.send('Products')
+})
+
+app.get('/api/items', function(req, res){
+    res.send('Items')
 })
 
 app.listen(5000, function(){
